@@ -7,6 +7,7 @@
  *
  */
 
+import java.sql.SQLException;
 import java.util.*;
 
 public interface DAO<T> {
@@ -14,7 +15,7 @@ public interface DAO<T> {
     
     List<T> getAll();
     
-    void save(T t);
+    int save(T t) throws SQLException;
     
     void update(T t, String[] params);
     
