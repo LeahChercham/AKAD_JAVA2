@@ -6,15 +6,31 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch JDBCExample",
+            "request": "launch",
+            "mainClass": "JDBCExample",
+            "projectName": "java2akad_431a2cf1"
+        },
+        {
+            "type": "java",
+            "name": "Launch JavaFXExample",
+            "request": "launch",
+            "vmArgs": "--module-path C:/Users/LeahC/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "JavaFXExample",
+            "projectName": "java2akad_431a2cf1"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
+            "vmArgs": "--module-path C:/Users/LeahC/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
         },
         {
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/LeahC/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml", 
+            "vmArgs": "--module-path C:/Users/LeahC/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "App",
             "projectName": "java2akad_431a2cf1"
         }
