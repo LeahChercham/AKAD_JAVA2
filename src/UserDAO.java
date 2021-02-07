@@ -72,7 +72,7 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public static int save(User user) throws SQLException {
+    public static int save(User user) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
