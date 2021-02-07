@@ -35,8 +35,8 @@ public class UserDAO implements DAO<User> {
 
     @Override
     public void update(User user, String[] params) {
-        user.setFirstName(Objects.requireNonNull(params[0], "FirstName cannot be null"));
-        user.setLastName(Objects.requireNonNull(params[1], "LastName cannot be null"));
+        user.setfirstName(Objects.requireNonNull(params[0], "FirstName cannot be null"));
+        user.setlastName(Objects.requireNonNull(params[1], "LastName cannot be null"));
         users.add(user);
     }
 

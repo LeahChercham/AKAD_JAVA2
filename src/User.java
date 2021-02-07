@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * The class User creates Instances of the User object.
@@ -10,71 +10,71 @@ import java.sql.Date;
 public class User {
     
     // Attribute
-    private Integer UserID; // automatic
-    private String LastName;
-    private String FirstName;
-    private String Password; // md5 sql method
-    private Date CreationDate; // automatic
-    private Date ModifiedDate; // automatic
+    private Integer userId; // automatic
+    private String lastName;
+    private String firstName;
+    private String password; // md5 sql method
+    private Timestamp createdTimeStamp; // automatic
+    private Timestamp modifiedTimeStamp; // automatic
 
     // Constructor
-    public User(Integer UserID, String LastName, String FirstName, String Password, Date CreationDate, Date ModifiedDate){
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.UserID = UserID;
-        this.Password = Password;
-        this.CreationDate = CreationDate;
-        this.ModifiedDate = ModifiedDate;
+    public User(Integer userId, String lastName, String firstName, String password, Timestamp createdTimeStamp, Timestamp modifiedTimeStamp){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
+        this.password = password;
+        this.createdTimeStamp = createdTimeStamp;
+        this.modifiedTimeStamp = modifiedTimeStamp;
     }
 
     // Setter & Getter
     // Setter
-    public void setUserID(Integer UserID) {
-        this.UserID = UserID;
+    public void setuserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public void setlastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setpassword(String password) {
+        this.password = password;
     }
 
-    public void setCreationDate(Date CreationDate) {
-        this.CreationDate = CreationDate;
+    public void setcreatedTimeStamp(Timestamp createdTimeStamp) {
+        this.createdTimeStamp = createdTimeStamp;
     }
 
-    public void setModifiedDate(Date ModifiedDate) {
-        this.ModifiedDate = ModifiedDate;
+    public void setmodifiedTimeStamp(Timestamp modifiedTimeStamp) {
+        this.modifiedTimeStamp = modifiedTimeStamp;
     }
 
     // Getter
-    public Integer getUserID() {
-        return UserID;
+    public Integer getuserId() {
+        return userId;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    public String getfirstName() {
+        return firstName;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getlastName() {
+        return lastName;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getpassword() {
+        return password;
     }
 
-    public Date getCreationDate() {
-        return CreationDate;
+    public Timestamp getcreatedTimeStamp() {
+        return createdTimeStamp;
     }
 
-    public Date getModifiedDate() {
-        return ModifiedDate;
+    public Timestamp getmodifiedTimeStamp() {
+        return modifiedTimeStamp;
     }
 }

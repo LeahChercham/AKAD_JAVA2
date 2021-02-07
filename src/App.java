@@ -1,9 +1,11 @@
+import java.sql.Timestamp;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -26,19 +28,61 @@ public class App extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25,25,25,25));
         
-        // Show Users
+
+        // Form for new user
+        Label firstNameLabel = new Label("First Name:");
+        grid.add(firstNameLabel,0,1);
+        TextField firstNameTextField = new TextField();
+        grid.add(firstNameTextField,1,1);
+
+        Label lastNameLabel = new Label("Last Name:");
+        grid.add(lastNameLabel,0,2);
+        TextField lastNameTextField = new TextField();
+        grid.add(lastNameTextField,1,2);
+
+
+        Label passwordLabel = new Label("Password:");
+        grid.add(passwordLabel,0,3);
+        PasswordField passwordTextField = new PasswordField();
+        grid.add(passwordTextField,1,3);
+
+        Label createdTimeStampLabel = new Label("Created at:");
+        grid.add(createdTimeStampLabel,0,5);
+        TextField createdTimeStampTextField = new TextField();
+        grid.add(createdTimeStampTextField,1,5);
+
+        Label modifiedTimeStampLabel = new Label("Modified at:");
+        grid.add(modifiedTimeStampLabel,0,6);
+        TextField modifiedTimeStampTextField = new TextField();
+        grid.add(modifiedTimeStampTextField,1,6);
+        // ? Show Users
         
         // Add User Button
-        Button button = new Button();
-        button.setText("Say 'Hello World'");
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        Button saveNewUserButton = new Button();
+        saveNewUserButton.setText("Save");
+        saveNewUserButton.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello world!");
+                System.out.println("Saving User");
+
+                // Get all the inputs
+                String firstName = String.valueOf(firstNameTextField.getText().trim());
+                String lastName = String.valueOf(lastNameTextField.getText().trim());
+                String password = String.valueOf(lastNameTextField.getText().trim());
+                Timestamp creationTimeStamp = new Timestamp(System.currentTimeMillis());
+                Timestamp modifiedTimeStamp = new Timestamp(System.currentTimeMillis());
+
+                // Console info
+                System.out.println(firstName + lastName + password + " date: " + creationTimeStamp + " mnodified: " + modifiedTimeStamp);
+
+                // Saving User
+                
             }
+
         });
         
-        grid.add(button, 0, 0);
+        grid.add(saveNewUserButton, 3, 7);
         
         
         
