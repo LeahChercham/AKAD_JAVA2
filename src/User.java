@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 /**
  * The class User creates Instances of the User object.
  * 
@@ -8,17 +10,21 @@
 public class User {
     
     // Attribute
-    private Integer UserID;
+    private Integer UserID; // automatic
     private String LastName;
     private String FirstName;
-    private String Password;
+    private String Password; // md5 sql method
+    private Date CreationDate; // automatic
+    private Date ModifiedDate; // automatic
 
     // Constructor
-    public User(Integer UserID, String LastName, String FirstName, String Password){
+    public User(Integer UserID, String LastName, String FirstName, String Password, Date CreationDate, Date ModifiedDate){
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.UserID = UserID;
         this.Password = Password;
+        this.CreationDate = CreationDate;
+        this.ModifiedDate = ModifiedDate;
     }
 
     // Setter & Getter
@@ -39,6 +45,14 @@ public class User {
         this.Password = Password;
     }
 
+    public void setCreationDate(Date CreationDate) {
+        this.CreationDate = CreationDate;
+    }
+
+    public void setModifiedDate(Date ModifiedDate) {
+        this.ModifiedDate = ModifiedDate;
+    }
+
     // Getter
     public Integer getUserID() {
         return UserID;
@@ -54,5 +68,13 @@ public class User {
 
     public String getPassword() {
         return Password;
+    }
+
+    public Date getCreationDate() {
+        return CreationDate;
+    }
+
+    public Date getModifiedDate() {
+        return ModifiedDate;
     }
 }

@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 public class JavaFXExample extends Application {
     @Override
+    // screen description
     public void start(Stage primaryStage){
         Button button = new Button();
         button.setText("Say 'Hello World'");
@@ -27,6 +28,7 @@ public class JavaFXExample extends Application {
         primaryStage.setScene((scene));
         primaryStage.show();
     }
+// Main Method that starts screen
     public static void main(String[] args){
         launch(args);
     }
