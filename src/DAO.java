@@ -1,3 +1,4 @@
+
 /**
  * DAO
  * Data Access Object Interface
@@ -11,12 +12,12 @@ import java.util.*;
 
 public interface DAO<T> {
     Optional<T> get(long id);
-    
+
     List<T> getAll();
-    
+
     int save(T t);
-    
+
     void update(T t, String[] params);
-    
+
     void delete(T t);
 }

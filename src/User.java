@@ -1,4 +1,4 @@
-
+import java.sql.Date;
 
 /**
  * The class User creates Instances of the User object.
@@ -14,18 +14,18 @@ public class User {
     private String lastName;
     private String firstName;
     private String password; // md5 sql method
-    private long createdTimeStamp; // automatic
-    private long modifiedTimeStamp; // automatic
+    private Date createdTimeStamp; // automatic
+    private Date modifiedTimeStamp; // automatic
 
     // Constructor
-    public User(Integer userId, String lastName, String firstName, String password, long createdTimeStamp,
-            long modifiedTimeStamp) {
+    public User(Integer userId, String lastName, String firstName, String password, Date creationTimeStamp,
+            Date modifiedTimeStamp2) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
         this.password = password;
-        this.createdTimeStamp = createdTimeStamp;
-        this.modifiedTimeStamp = modifiedTimeStamp;
+        this.createdTimeStamp = creationTimeStamp;
+        this.modifiedTimeStamp = modifiedTimeStamp2;
     }
 
     // Setter & Getter
@@ -46,11 +46,11 @@ public class User {
         this.password = password;
     }
 
-    public void setcreatedTimeStamp(long createdTimeStamp) {
+    public void setcreatedTimeStamp(Date createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
     }
 
-    public void setmodifiedTimeStamp(long modifiedTimeStamp) {
+    public void setmodifiedTimeStamp(Date modifiedTimeStamp) {
         this.modifiedTimeStamp = modifiedTimeStamp;
     }
 
@@ -71,11 +71,11 @@ public class User {
         return password;
     }
 
-    public long getcreatedTimeStamp() {
+    public Date getcreatedTimeStamp() {
         return createdTimeStamp;
     }
 
-    public long getmodifiedTimeStamp() {
+    public Date getmodifiedTimeStamp() {
         return modifiedTimeStamp;
     }
 }

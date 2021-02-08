@@ -20,8 +20,8 @@ public class UserDAO implements DAO<User> {
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
     public UserDAO() {
-        users.add(new User(null, "John", "Doe", null, 0, 0));
-        users.add(new User(null, "Susan", "Smith", null, 0, 0));
+        users.add(new User(null, "John", "Doe", null, null, null));
+        users.add(new User(null, "Susan", "Smith", null, null, null));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UserDAO implements DAO<User> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getLong(5), resultSet.getLong(6));
+                        resultSet.getString(4), resultSet.getDate(5), resultSet.getDate(6));
                 users.add(user);
             }
             return users;
@@ -71,8 +71,8 @@ public class UserDAO implements DAO<User> {
         return users;
     }
 
-    @Override
-    public static int save(User user) {
+    // @Override
+    public static int saveUser(User user) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -80,15 +80,15 @@ public class UserDAO implements DAO<User> {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            String query = "INSERT INTO users(user_id, first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, ?)";
+            // String query = "INSERT INTO users(user_id, first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, ?)";
+            String query = "INSERT INTO users(first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, ?, ?)";
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             int counter = 1;
-            statement.setLong(counter++, user.getuserId());
             statement.setString(counter++, user.getfirstName());
             statement.setString(counter++, user.getlastName());
             statement.setString(counter++, user.getpassword());
-            statement.setLong(counter++, user.getcreatedTimeStamp());
-            statement.setLong(counter++, user.getmodifiedTimeStamp());
+            statement.setDate(counter++, user.getcreatedTimeStamp());
+            statement.setDate(counter++, user.getmodifiedTimeStamp());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
@@ -130,9 +130,15 @@ public class UserDAO implements DAO<User> {
         users.remove(user);
     }
 
-    // TO DO
+    // TODO UserExists
     public static boolean userExists(String firstName, String lastName) {
         return true;
     }
 
+    @Override
+    public int save(User t) {
+        // TODO Auto-generated method stub
+        // INFO i can not put the method in here because of static errors.
+        return 0;
+    }
 }

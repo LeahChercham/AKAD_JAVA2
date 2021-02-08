@@ -1,9 +1,11 @@
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -66,8 +68,10 @@ public class App extends Application {
                 String firstName = String.valueOf(firstNameTextField.getText().trim());
                 String lastName = String.valueOf(lastNameTextField.getText().trim());
                 String password = String.valueOf(passwordField.getText().trim());
-                Long creationTimeStamp = System.currentTimeMillis();
-                Long modifiedTimeStamp = System.currentTimeMillis();
+
+                java.util.Date utilDate = new java.util.Date();
+                java.sql.Date creationTimeStamp = new java.sql.Date(utilDate.getTime());
+                java.sql.Date modifiedTimeStamp = new java.sql.Date(utilDate.getTime());
 
                 // Console info
                 System.out.println(firstName + lastName + password + " date: " + creationTimeStamp + " mnodified: "
@@ -76,14 +80,24 @@ public class App extends Application {
                 // Saving User
                 if (UserDAO.userExists(firstName, lastName)) {
                     // Save user
-                    User user = new User(null, firstName, lastName, password, creationTimeStamp,
-                            modifiedTimeStamp);
-                    int user_saved = UserDAO.save(user);
+                    User user = new User(null, firstName, lastName, password, creationTimeStamp, modifiedTimeStamp);
+                    int user_saved;
+                    try {
+                        user_saved = UserDAO.saveUser(user);
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                        user_saved = 0;
+                    }
                     if (user_saved > 0) {
                         // ("Save", "Successful", AlertType.INFORMATION);
-                    } else {
-                        // ("Error", "User already exists!", AlertType.ERROR);
+                        Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
+                        alert.show();
                     }
+                } else {
+                    // ("Error", "User already exists!", AlertType.ERROR);
+                    Alert alert = new Alert(AlertType.ERROR, "User already exists!");
+                    alert.show();
                 }
 
             }
