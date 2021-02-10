@@ -16,6 +16,7 @@ public class Database {
 
     // Ist im Beispiel aber brauche ich das?
     // private Database() {
+        // Kann ich hier die funktionen get all aus App?
 
     // }
 

@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Table",
+            "request": "launch",
+            "vmArgs": "--module-path C:/Users/LeahC/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Table",
+            "projectName": "java2akad_431a2cf1"
+        },
+        {
+            "type": "java",
             "name": "Launch JDBCExample",
             "request": "launch",
             "mainClass": "JDBCExample",
