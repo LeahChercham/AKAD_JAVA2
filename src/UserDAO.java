@@ -7,8 +7,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
-
 /**
  * UserDAO Data Access Object for Users Hide from the app all the complexities
  * involved in performing CRUD operations in the database
@@ -32,10 +30,10 @@ public class UserDAO implements DAO<User> {
     }
 
     // @Override
-    public static ObservableList<User> getAllUsers() {
+    public static ArrayList<User> getAllUsers() {
         Connection connection = null;
         PreparedStatement statement = null;
-        List<User> users = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
 
         try {
             connection = Database.getDBConnection();

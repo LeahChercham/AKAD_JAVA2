@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,14 +19,14 @@ import javafx.geometry.Insets;
 public class App extends Application {
 
     // TABLE VIEW AND DATA
-    private ObservableList<User> users;
-    private TableView tableView = new TableView();
+    private TableView<User> tableView = new TableView();
     private TableColumn<User, Integer> userIdColumn = new TableColumn<>("User ID");
     private TableColumn<User, String> firstNameColumn = new TableColumn<>("First Name");
     private TableColumn<User, String> lastNameColumn = new TableColumn<>("Last Name");
     private TableColumn<User, Date> createdAtColumn = new TableColumn<>("Created at");
     private TableColumn<User, Date> modifiedAtColumn = new TableColumn<>("Modified at");
-
+    private ArrayList<User> users;
+    private ObservableList<User> data;
 
     // MAIN EXECUTOR
     public static void main(String[] args) {
@@ -39,17 +40,18 @@ public class App extends Application {
     // CONNECTION DB
     public void buildData() {
         users = UserDAO.getAllUsers();
-        while (users.size() > 0) {
-            for (int i = 1; i <= users.size(); i++) {
-                String firstName = users.get(i).getfirstName();
-                String lastName = users.get(i).getlastName();
-                Integer userId = users.get(i).getuserId();
-                Date creationTimeStamp = users.get(i).getcreatedTimeStamp();
-                Date modifiedTimeStamp = users.get(i).getmodifiedTimeStamp();
-                userIdColumn.setCellFactory(new PropertyValueFactory<>, "userId");
-                tableView.add(userId, firstName, lastName, creationTimeStamp, modifiedTimeStamp);
-            }
+        for (int i = 1; i <= users.size(); i++) {
+            // String firstName = users.get(i).getfirstName();
+            // String lastName = users.get(i).getlastName();
+            // Integer userId = users.get(i).getuserId();
+            // Date creationTimeStamp = users.get(i).getcreatedTimeStamp();
+            // Date modifiedTimeStamp = users.get(i).getmodifiedTimeStamp();
+
+            // tableView.add(userId, firstName, lastName, creationTimeStamp,
+            // modifiedTimeStamp);
+            data.add(users.get(i));
         }
+        tableView.setItems(data);
     }
 
     /* Screen Description */
@@ -154,8 +156,4 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    // Main Method that starts screen
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
