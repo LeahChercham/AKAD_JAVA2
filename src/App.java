@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,15 +24,11 @@ public class App extends Application {
     private TableColumn<User, Integer> userIdColumn = new TableColumn<>("User ID");
     private TableColumn<User, String> firstNameColumn = new TableColumn<>("First Name");
     private TableColumn<User, String> lastNameColumn = new TableColumn<>("Last Name");
+    private TableColumn<User, String> passwordColumn = new TableColumn<>("Password");
     private TableColumn<User, Date> createdAtColumn = new TableColumn<>("Created at");
     private TableColumn<User, Date> modifiedAtColumn = new TableColumn<>("Modified at");
     private ArrayList<User> users;
-    private ObservableList<User> data;
-
-    // MAIN EXECUTOR
-    public static void main(String[] args) {
-        launch(args);
-    }
+    private ObservableList<User> data = FXCollections.observableArrayList();
 
     /*
      * Missing: Array All Users from DB; All DB Actions (as Imports?)
@@ -40,7 +37,7 @@ public class App extends Application {
     // CONNECTION DB
     public void buildData() {
         users = UserDAO.getAllUsers();
-        for (int i = 1; i <= users.size(); i++) {
+        for (int i = 0; i < users.size(); i++) {
             // String firstName = users.get(i).getfirstName();
             // String lastName = users.get(i).getlastName();
             // Integer userId = users.get(i).getuserId();
@@ -49,8 +46,10 @@ public class App extends Application {
 
             // tableView.add(userId, firstName, lastName, creationTimeStamp,
             // modifiedTimeStamp);
+            System.out.println("bug");
             data.add(users.get(i));
         }
+        System.out.println("hii");
         tableView.setItems(data);
     }
 
@@ -156,4 +155,8 @@ public class App extends Application {
         primaryStage.show();
     }
 
+    // MAIN EXECUTOR
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

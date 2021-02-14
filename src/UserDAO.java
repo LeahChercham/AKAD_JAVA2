@@ -38,7 +38,7 @@ public class UserDAO implements DAO<User> {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            String query = "SELECT user_id, first_name, last_name, created_at, modified_at, password FROM user WHERE username = ?";
+            String query = "SELECT user_id, first_name, last_name, password, created_at, modified_at, password FROM users";
             statement = connection.prepareStatement(query);
             // int counter = 1;
             // statement.setString(counter++, first_name);
@@ -50,6 +50,8 @@ public class UserDAO implements DAO<User> {
             }
             return users;
         } catch (SQLException exception) {
+
+            // Severe: No Value specified for paramweter 1
             logger.log(Level.SEVERE, exception.getMessage());
         } finally {
             if (null != statement) {

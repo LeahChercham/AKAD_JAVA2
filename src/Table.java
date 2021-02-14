@@ -19,10 +19,11 @@ public class Table extends Application {
         TableColumn<User, Integer> userIdColumn = new TableColumn<>("User ID");
         TableColumn<User, String> firstNameColumn = new TableColumn<>("First Name");
         TableColumn<User, String> lastNameColumn = new TableColumn<>("Last Name");
+        TableColumn<User, String> passwordColumn = new TableColumn<>("Password");
         TableColumn<User, Date> createdAtColumn = new TableColumn<>("Created at");
         TableColumn<User, Date> modifiedAtColumn = new TableColumn<>("Modified at");
         
-        table.getColumns().addAll(userIdColumn, firstNameColumn, lastNameColumn, createdAtColumn, modifiedAtColumn);
+        table.getColumns().addAll(userIdColumn, firstNameColumn, lastNameColumn, passwordColumn, createdAtColumn, modifiedAtColumn);
 
 
 
