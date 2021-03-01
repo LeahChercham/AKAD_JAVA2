@@ -89,8 +89,6 @@ public class UserDAO implements DAO<User> {
             statement.setString(counter++, user.getfirstName());
             statement.setString(counter++, user.getlastName());
             statement.setString(counter++, user.getpassword());
-            // statement.setDate(counter++, user.getcreatedTimeStamp());
-            // statement.setDate(counter++, user.getmodifiedTimeStamp());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
