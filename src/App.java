@@ -46,10 +46,8 @@ public class App extends Application {
 
             // tableView.add(userId, firstName, lastName, creationTimeStamp,
             // modifiedTimeStamp);
-            System.out.println("bug");
             data.add(users.get(i));
         }
-        System.out.println("hii");
         tableView.setItems(data);
     }
 

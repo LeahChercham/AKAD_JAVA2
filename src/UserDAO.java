@@ -82,15 +82,15 @@ public class UserDAO implements DAO<User> {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            // String query = "INSERT INTO users(user_id, first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, ?)";
-            String query = "INSERT INTO users(first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users(first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, NOW(), NOW())";
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
             int counter = 1;
             statement.setString(counter++, user.getfirstName());
             statement.setString(counter++, user.getlastName());
             statement.setString(counter++, user.getpassword());
-            statement.setDate(counter++, user.getcreatedTimeStamp());
-            statement.setDate(counter++, user.getmodifiedTimeStamp());
+            // statement.setDate(counter++, user.getcreatedTimeStamp());
+            // statement.setDate(counter++, user.getmodifiedTimeStamp());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
