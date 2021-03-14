@@ -44,12 +44,12 @@ public class viewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-        userId.setCellValueFactory(new PropertyValueFactory<User, Integer>(null));
-        lastName.setCellValueFactory(new PropertyValueFactory<User, String>(""));
-        firstName.setCellValueFactory(new PropertyValueFactory<User, String>(""));
-        password.setCellValueFactory(new PropertyValueFactory<User, String>(""));
-        createdTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>(""));
-        modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>(""));
+        userId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
+        lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+        firstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+        password.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
+        createdTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("createdTimeStamp"));
+        modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("modifiedTimeStamp"));
 
         tableView.getItems().setAll(parseUserList());
     }
