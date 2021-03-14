@@ -54,7 +54,10 @@ public class App extends Application {
     /* Screen Description */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+        FXMLLoader viewSceneLoader = new FXMLLoader(getClass().getResource("view.fxml"));
+        Parent root = (Parent) viewSceneLoader.load();
+
+        viewController ctrlPointer = (viewController) viewSceneLoader.getController();
     
         Scene scene = new Scene(root, 800, 500);
     
