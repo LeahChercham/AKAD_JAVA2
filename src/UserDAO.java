@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * UserDAO Data Access Object for Users Hide from the app all the complexities
  * involved in performing CRUD operations in the database
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  */
 
 public class UserDAO implements DAO<User> {
-    private List<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
     public UserDAO() {
@@ -86,9 +87,9 @@ public class UserDAO implements DAO<User> {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             int counter = 1;
-            statement.setString(counter++, user.getfirstName());
-            statement.setString(counter++, user.getlastName());
-            statement.setString(counter++, user.getpassword());
+            statement.setString(counter++, user.getFirstName());
+            statement.setString(counter++, user.getLastName());
+            statement.setString(counter++, user.getPassword());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
@@ -120,8 +121,8 @@ public class UserDAO implements DAO<User> {
 
     @Override
     public void update(User user, String[] params) {
-        user.setfirstName(Objects.requireNonNull(params[0], "FirstName cannot be null"));
-        user.setlastName(Objects.requireNonNull(params[1], "LastName cannot be null"));
+        user.setFirstName(Objects.requireNonNull(params[0], "FirstName cannot be null"));
+        user.setLastName(Objects.requireNonNull(params[1], "LastName cannot be null"));
         users.add(user);
     }
 

@@ -8,7 +8,7 @@ import java.sql.Date;
  */
 
 public class User {
-    
+
     // Attribute
     private Integer userId; // automatic
     private String lastName;
@@ -30,52 +30,52 @@ public class User {
 
     // Setter & Getter
     // Setter
-    public void setuserId(Integer userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public void setfirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setlastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setpassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setcreatedTimeStamp(Date createdTimeStamp) {
+    public void setCreatedTimeStamp(Date createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
     }
 
-    public void setmodifiedTimeStamp(Date modifiedTimeStamp) {
+    public void setModifiedTimeStamp(Date modifiedTimeStamp) {
         this.modifiedTimeStamp = modifiedTimeStamp;
     }
 
     // Getter
-    public Integer getuserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getlastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public String getpassword() {
+    public String getPassword() {
         return password;
     }
 
-    public Date getcreatedTimeStamp() {
+    public Date getCreatedTimeStamp() {
         return createdTimeStamp;
     }
 
-    public Date getmodifiedTimeStamp() {
+    public Date getModifiedTimeStamp() {
         return modifiedTimeStamp;
     }
 }
