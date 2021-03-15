@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import java.net.URL;
 import java.sql.Date;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class viewController implements Initializable {
 
@@ -38,6 +40,7 @@ public class viewController implements Initializable {
     private TableColumn<User, Date> createdTimeStamp;
     @FXML
     private TableColumn<User, Date> modifiedTimeStamp;
+    
 
     private ArrayList<User> users = new ArrayList<>();
     private ObservableList<User> data = FXCollections.observableArrayList();
@@ -51,7 +54,16 @@ public class viewController implements Initializable {
         createdTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("createdTimeStamp"));
         modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("modifiedTimeStamp"));
 
+        TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
+        modifyEntryColumn.setMinWidth(40);
+
+        modifyEntryColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        modifyEntryColumn.setCellFactory(param -> new TableCell<User, User>() {
+            private final Button modifyEntryButton = new Button("modify");
+        });
+
         tableView.getItems().setAll(parseUserList());
+        tableView.getColumns().add(modifyEntryColumn);
     }
 
     private ObservableList<User> parseUserList() {
@@ -69,7 +81,7 @@ public class viewController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleSaveButtonAction(ActionEvent event) {
         System.out.println("Saving User");
 
         // Get all the inputs
@@ -98,6 +110,7 @@ public class viewController implements Initializable {
                 lastNameTextField.clear();
                 Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
                 alert.show();
+                
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR, "User already exists!");
@@ -105,4 +118,9 @@ public class viewController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleModifyButtonAction(ActionEvent event) {
+        Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
+            alert.show();
+    }
 }

@@ -26,7 +26,7 @@
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
     <PasswordField GridPane.columnIndex="0" GridPane.rowIndex="5" fx:id="passwordField"/>
 
-    <Button text="save" onAction="#handleButtonAction" fx:id="saveNewUserButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Button text="save" onAction="#handleSaveButtonAction" fx:id="saveNewUserButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
 
 
@@ -44,7 +44,9 @@
             </TableColumn>
             <TableColumn text="Last modified:" fx:id="modifiedTimeStamp">
             </TableColumn>
+         
         </columns>
+            <!-- <Button text="modify" onAction="#handleModifyButtonAction" fx:id="modifyEntryButton"/> -->
     </TableView>
 
     <stylesheets>
