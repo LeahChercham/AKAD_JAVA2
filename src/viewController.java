@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.beans.EventHandler;
 import java.net.URL;
 import java.sql.Date;
 
@@ -40,7 +41,6 @@ public class viewController implements Initializable {
     private TableColumn<User, Date> createdTimeStamp;
     @FXML
     private TableColumn<User, Date> modifiedTimeStamp;
-    
 
     private ArrayList<User> users = new ArrayList<>();
     private ObservableList<User> data = FXCollections.observableArrayList();
@@ -55,15 +55,35 @@ public class viewController implements Initializable {
         modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("modifiedTimeStamp"));
 
         TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
-        modifyEntryColumn.setMinWidth(40);
 
-        modifyEntryColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-        modifyEntryColumn.setCellFactory(param -> new TableCell<User, User>() {
-            private final Button modifyEntryButton = new Button("modify");
-        });
+        // Button modifyEntryButton = new Button("Text");
+        // modifyEntryColumn.setMinWidth(40);
+
+        // modifyEntryColumn.setCellValueFactory(param -> new
+        // ReadOnlyObjectWrapper<>(param.getValue()));
+        // modifyEntryColumn.setCellFactory(param -> new TableCell<User, User>() {
+        // private final Button modifyEntryButton;
+        // });
+
+        TableColumn<User, User> btnCol = new TableColumn<>("pulsanti");
+        btnCol.setCellFactory(new Callback<TableColumn<User, User>, TableCell<User, User>>() {
+            @Override
+            public TableCell<User, User> call(TableColumn<User, User> btnCol) {
+                final Button button = new Button("button text");
+                button.setMinWidth(130); 
+                TableCell<User, User> cell = new TableCell<User, User>() {              
+                    public void alert() {
+                        Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
+                        alert.show();
+                    }
+                  };
+                return cell;
+
+                // button.setOnAction();
+        }});
 
         tableView.getItems().setAll(parseUserList());
-        tableView.getColumns().add(modifyEntryColumn);
+        tableView.getColumns().add(btnCol);
     }
 
     private ObservableList<User> parseUserList() {
@@ -110,7 +130,7 @@ public class viewController implements Initializable {
                 lastNameTextField.clear();
                 Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
                 alert.show();
-                
+
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR, "User already exists!");
@@ -121,6 +141,6 @@ public class viewController implements Initializable {
     @FXML
     private void handleModifyButtonAction(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
-            alert.show();
+        alert.show();
     }
 }
