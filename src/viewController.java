@@ -54,7 +54,13 @@ public class viewController implements Initializable {
         createdTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("createdTimeStamp"));
         modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("modifiedTimeStamp"));
 
-        TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
+
+    // ====================================
+    // ====================================
+    // ====================================
+
+    // HERE IT STARTS
+         TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
 
         // Button modifyEntryButton = new Button("Text");
         // modifyEntryColumn.setMinWidth(40);
@@ -65,7 +71,7 @@ public class viewController implements Initializable {
         // private final Button modifyEntryButton;
         // });
 
-        TableColumn<User, User> btnCol = new TableColumn<>("pulsanti");
+        TableColumn<User, User> btnCol = new TableColumn<>("here should be the button");
         btnCol.setCellFactory(new Callback<TableColumn<User, User>, TableCell<User, User>>() {
             @Override
             public TableCell<User, User> call(TableColumn<User, User> btnCol) {
@@ -86,9 +92,14 @@ public class viewController implements Initializable {
         tableView.getColumns().add(btnCol);
     }
 
+    // HERE IT ENDS
+    // ====================================
+    // ====================================
+    // ====================================
+
+
     private ObservableList<User> parseUserList() {
-        // parse and construct User datamodel list by looping your ResultSet rs
-        // and return the list
+        // parse and construct User datamodel list by looping
         users = UserDAO.getAllUsers();
         for (int i = 0; i < users.size(); i++) {
             User user = new User(users.get(i).getUserId(), users.get(i).getLastName(), users.get(i).getFirstName(),
