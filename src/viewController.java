@@ -55,48 +55,83 @@ public class viewController implements Initializable {
         modifiedTimeStamp.setCellValueFactory(new PropertyValueFactory<User, Date>("modifiedTimeStamp"));
 
 
+
+         TableColumn modifyEntryColumn = new TableColumn<>("Modify");
+         modifyEntryColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+
+
+         Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory = new Callback<TableColumn<User, String>, TableCell<User, String>>(){
+
+             @Override
+             public TableCell<User, String> call(final TableColumn<User, String> param) {
+                 final TableCell<User, String> cell = new TableCell<User, String>(){
+                     final Button modifyButton = new Button("modify");
+
+                     @Override
+                     public void updateItem(String item, boolean empty){
+                         super.updateItem(item, empty);
+                         if(empty){
+                             setGraphic(null);
+                             setText(null);
+                         } else {
+                             modifyButton.setOnAction(event -> {
+                                 User user = getTableView().getItems().get(getIndex());
+                                 System.out.println(user.getFirstName());
+                             });
+                             setGraphic(modifyButton);
+                             setText(null);
+                         }
+                     }
+                 };
+                 return cell;
+             }
+            
+         };
+
+
+
     // ====================================
     // ====================================
     // ====================================
 
-    // HERE IT STARTS
-         TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
+    // // HERE IT STARTS
+    //      TableColumn<User, User> modifyEntryColumn = new TableColumn<>("Modify");
 
-        // Button modifyEntryButton = new Button("Text");
-        // modifyEntryColumn.setMinWidth(40);
+    //     // Button modifyEntryButton = new Button("Text");
+    //     // modifyEntryColumn.setMinWidth(40);
 
-        // modifyEntryColumn.setCellValueFactory(param -> new
-        // ReadOnlyObjectWrapper<>(param.getValue()));
-        // modifyEntryColumn.setCellFactory(param -> new TableCell<User, User>() {
-        // private final Button modifyEntryButton;
-        // });
+    //     // modifyEntryColumn.setCellValueFactory(param -> new
+    //     // ReadOnlyObjectWrapper<>(param.getValue()));
+    //     // modifyEntryColumn.setCellFactory(param -> new TableCell<User, User>() {
+    //     // private final Button modifyEntryButton;
+    //     // });
 
-        TableColumn<User, User> btnCol = new TableColumn<>("here should be the button");
-        btnCol.setCellFactory(new Callback<TableColumn<User, User>, TableCell<User, User>>() {
-            @Override
-            public TableCell<User, User> call(TableColumn<User, User> btnCol) {
-                final Button button = new Button("button text");
-                button.setMinWidth(130); 
-                TableCell<User, User> cell = new TableCell<User, User>() {              
-                    public void alert() {
-                        Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
-                        alert.show();
-                    }
-                  };
-                return cell;
+    //     TableColumn<User, User> btnCol = new TableColumn<>("here should be the button");
+    //     btnCol.setCellFactory(new Callback<TableColumn<User, User>, TableCell<User, User>>() {
+    //         @Override
+    //         public TableCell<User, User> call(TableColumn<User, User> btnCol) {
+    //             final Button button = new Button("button text");
+    //             button.setMinWidth(130); 
+    //             TableCell<User, User> cell = new TableCell<User, User>() {              
+    //                 public void alert() {
+    //                     Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
+    //                     alert.show();
+    //                 }
+    //               };
+    //             return cell;
 
-                // button.setOnAction();
-        }});
+    //             // button.setOnAction();
+    //     }});
 
-        tableView.getItems().setAll(parseUserList());
-        tableView.getColumns().add(btnCol);
-    }
+    //     tableView.getItems().setAll(parseUserList());
+    //     tableView.getColumns().add(btnCol);
+    
 
     // HERE IT ENDS
     // ====================================
     // ====================================
     // ====================================
-
+}
 
     private ObservableList<User> parseUserList() {
         // parse and construct User datamodel list by looping
