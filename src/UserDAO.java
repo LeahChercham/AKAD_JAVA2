@@ -7,7 +7,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * UserDAO Data Access Object for Users Hide from the app all the complexities
  * involved in performing CRUD operations in the database
@@ -115,7 +114,6 @@ public class UserDAO implements DAO<User> {
                 connection.close();
             }
         }
-
         return 0;
     }
 
@@ -126,9 +124,47 @@ public class UserDAO implements DAO<User> {
         users.add(user);
     }
 
-    @Override
-    public void delete(User user) {
-        users.remove(user);
+    public static int deleteUser(User user) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = Database.getDBConnection();
+            connection.setAutoCommit(false);
+            String query = "DELETE FROM users WHERE user_id = ?";
+            statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            int counter = 1;
+            statement.setInt(counter++, user.getUserId());
+            statement.execute();
+            connection.commit();
+            // resultSet = statement.getGeneratedKeys();
+
+            // if (resultSet.next()) {
+            // return resultSet.getInt(1);
+            // }
+
+        } catch (SQLException exception) {
+            logger.log(Level.SEVERE, exception.getMessage());
+            if (null != connection) {
+                connection.rollback();
+            }
+        } finally {
+            // if (null != resultSet) {
+            // resultSet.close();
+            // }
+
+            if (null != statement) {
+                statement.close();
+            }
+
+            if (null != connection) {
+                connection.close();
+            }
+        }
+
+        return 1;
     }
 
     // TODO UserExists
@@ -147,5 +183,11 @@ public class UserDAO implements DAO<User> {
     public List<User> getAll() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void delete(User t) {
+        // TODO Auto-generated method stub
+
     }
 }

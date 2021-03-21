@@ -46,7 +46,6 @@
             </TableColumn>
          
         </columns>
-            <!-- <Button text="modify" onAction="#handleModifyButtonAction" fx:id="modifyEntryButton"/> -->
     </TableView>
 
     <stylesheets>

@@ -61,7 +61,6 @@ public class viewController implements Initializable {
         deleteEntryColumn.setCellValueFactory(new PropertyValueFactory<>(null));
 
         Callback<TableColumn<User, String>, TableCell<User, String>> cellFactoryModify = new Callback<TableColumn<User, String>, TableCell<User, String>>() {
-
             @Override
             public TableCell<User, String> call(final TableColumn<User, String> param) {
                 final TableCell<User, String> cell = new TableCell<User, String>() {
@@ -87,9 +86,7 @@ public class viewController implements Initializable {
                 };
                 return cell;
             }
-
         };
-
 
         Callback<TableColumn<User, String>, TableCell<User, String>> cellFactoryDelete = new Callback<TableColumn<User, String>, TableCell<User, String>>() {
 
@@ -110,6 +107,27 @@ public class viewController implements Initializable {
                                 // HERE FUNCTION DELETE
                                 User user = getTableView().getItems().get(getIndex());
                                 System.out.println("I will delete: " + user.getFirstName());
+
+                                int user_deleted;
+
+                                try {
+                                    user_deleted = UserDAO.deleteUser(user);
+                                } catch (SQLException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                    user_deleted = 0;
+                                }
+
+                                if (user_deleted > 0) {
+                                    Alert alert = new Alert(AlertType.INFORMATION, "Deletion successful");
+                                    alert.show();
+                           
+                                    tableView.getItems().setAll(parseUserList());
+
+                                } else {
+                                    Alert alert = new Alert(AlertType.ERROR, "Could not delete user");
+                                    alert.show();
+                                }
                             });
                             setGraphic(deleteButton);
                             setText(null);
@@ -145,17 +163,11 @@ public class viewController implements Initializable {
     private void handleSaveButtonAction(ActionEvent event) {
         System.out.println("Saving User");
 
-        // Get all the inputs
         String firstName = String.valueOf(firstNameTextField.getText().trim());
         String lastName = String.valueOf(lastNameTextField.getText().trim());
         String password = String.valueOf(passwordField.getText().trim());
 
-        // Console info
-        System.out.println(firstName + lastName + password + " date: ");
-
-        // Saving User
         if (UserDAO.userExists(firstName, lastName)) {
-            // Save user
             User user = new User(null, firstName, lastName, password, null, null);
             int user_saved;
             try {
@@ -172,6 +184,7 @@ public class viewController implements Initializable {
                 Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
                 alert.show();
 
+                tableView.getItems().setAll(parseUserList());
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR, "User already exists!");
@@ -179,9 +192,4 @@ public class viewController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleModifyButtonAction(ActionEvent event) {
-        Alert alert = new Alert(AlertType.INFORMATION, "Button Clicked!");
-        alert.show();
-    }
 }
