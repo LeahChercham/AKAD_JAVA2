@@ -15,7 +15,7 @@ public class App extends Application {
         viewController ctrlPointer = (viewController)
         viewSceneLoader.getController();
 
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 1000, 500);
 
         stage.setTitle("User Administration");
         stage.setScene(scene);

@@ -57,12 +57,15 @@ public class viewController implements Initializable {
         TableColumn modifyEntryColumn = new TableColumn<>("Modify");
         modifyEntryColumn.setCellValueFactory(new PropertyValueFactory<>(null));
 
-        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory = new Callback<TableColumn<User, String>, TableCell<User, String>>() {
+        TableColumn deleteEntryColumn = new TableColumn<>("Delete");
+        deleteEntryColumn.setCellValueFactory(new PropertyValueFactory<>(null));
+
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactoryModify = new Callback<TableColumn<User, String>, TableCell<User, String>>() {
 
             @Override
             public TableCell<User, String> call(final TableColumn<User, String> param) {
                 final TableCell<User, String> cell = new TableCell<User, String>() {
-                    final Button modifyButton = new Button("modify");
+                    final Button modifyButton = new Button("Modify");
 
                     @Override
                     public void updateItem(String item, boolean empty) {
@@ -72,6 +75,8 @@ public class viewController implements Initializable {
                             setText(null);
                         } else {
                             modifyButton.setOnAction(event -> {
+
+                                // HERE FUNCTION MODIFY
                                 User user = getTableView().getItems().get(getIndex());
                                 System.out.println(user.getFirstName());
                             });
@@ -85,9 +90,42 @@ public class viewController implements Initializable {
 
         };
 
-        modifyEntryColumn.setCellFactory(cellFactory);
+
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactoryDelete = new Callback<TableColumn<User, String>, TableCell<User, String>>() {
+
+            @Override
+            public TableCell<User, String> call(final TableColumn<User, String> param) {
+                final TableCell<User, String> cell = new TableCell<User, String>() {
+                    final Button deleteButton = new Button("Delete");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            deleteButton.setOnAction(event -> {
+
+                                // HERE FUNCTION DELETE
+                                User user = getTableView().getItems().get(getIndex());
+                                System.out.println("I will delete: " + user.getFirstName());
+                            });
+                            setGraphic(deleteButton);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        modifyEntryColumn.setCellFactory(cellFactoryModify);
+        deleteEntryColumn.setCellFactory(cellFactoryDelete);
         tableView.getItems().setAll(parseUserList());
         tableView.getColumns().add(modifyEntryColumn);
+        tableView.getColumns().add(deleteEntryColumn);
     }
 
     private ObservableList<User> parseUserList() {
