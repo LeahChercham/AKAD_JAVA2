@@ -45,9 +45,6 @@
         </columns>
     </TableView>
 
-    <Button text="display" onAction="#handleDisplayButtonAction" fx:id="displayButton" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
-
-
     <stylesheets>
         <URL value="@view.css"/>
     </stylesheets>

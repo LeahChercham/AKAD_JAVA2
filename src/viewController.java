@@ -84,7 +84,22 @@ public class viewController implements Initializable {
 
                                 // HERE FUNCTION MODIFY
                                 User user = getTableView().getItems().get(getIndex());
-                                System.out.println(user.getFirstName());
+
+                                try {
+                                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPopUp.fxml"));
+                                    Parent root = (Parent) fxmlLoader.load();
+                                    modifyPopUpController modifyPopUpController = fxmlLoader.getController();
+                                    modifyPopUpController.transferMessage(user);
+                                    Stage stage = new Stage();
+                                    stage.setTitle("Modify");
+                                    stage.setScene(new Scene(root, 500, 250));
+                                    stage.show();
+
+                                } catch (IOException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+
                             });
                             setGraphic(modifyButton);
                             setText(null);
@@ -113,8 +128,6 @@ public class viewController implements Initializable {
 
                                 // HERE FUNCTION DELETE
                                 User user = getTableView().getItems().get(getIndex());
-                                System.out.println("I will delete: " + user.getFirstName());
-
                                 int user_deleted;
 
                                 try {
@@ -170,7 +183,6 @@ public class viewController implements Initializable {
 
     @FXML
     private void handleSaveButtonAction(ActionEvent event) {
-        System.out.println("Saving User");
 
         String firstName = String.valueOf(firstNameTextField.getText().trim());
         String lastName = String.valueOf(lastNameTextField.getText().trim());
@@ -201,20 +213,7 @@ public class viewController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleDisplayButtonAction(ActionEvent event) {
-        System.out.println("AHHH");
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPopUp.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }   
+    public void refreshData(){
+        tableView.getItems().setAll(parseUserList());
     }
 }

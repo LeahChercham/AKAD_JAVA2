@@ -89,6 +89,7 @@ public class UserDAO implements DAO<User> {
             statement.setString(counter++, user.getFirstName());
             statement.setString(counter++, user.getLastName());
             statement.setString(counter++, user.getPassword());
+            // statement.setString(counter++, user.getPassword());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
@@ -96,6 +97,53 @@ public class UserDAO implements DAO<User> {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
+        } catch (SQLException exception) {
+            logger.log(Level.SEVERE, exception.getMessage());
+            if (null != connection) {
+                connection.rollback();
+            }
+        } finally {
+            if (null != resultSet) {
+                resultSet.close();
+            }
+
+            if (null != statement) {
+                statement.close();
+            }
+
+            if (null != connection) {
+                connection.close();
+            }
+        }
+        return 0;
+    }
+
+    public static int modifyUser(User user) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = Database.getDBConnection();
+            connection.setAutoCommit(false);
+            // Update
+            String query = "UPDATE users SET first_name = ?, last_name = ?, password = ?, modified_at = NOW() WHERE user_id = ?";
+            statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            int counter = 1;
+            statement.setString(counter++, user.getFirstName());
+            statement.setString(counter++, user.getLastName());
+            statement.setString(counter++, user.getPassword());
+            statement.setLong(counter++, user.getUserId());
+            statement.executeUpdate();
+            connection.commit();
+            resultSet = statement.getGeneratedKeys();
+            // if (resultSet.next()) {
+            //     System.out.print(resultSet.getInt(0));
+            //     System.out.print(resultSet.getInt(1));
+            //     return resultSet.getInt(1);
+            // }
+            return 1;
         } catch (SQLException exception) {
             logger.log(Level.SEVERE, exception.getMessage());
             if (null != connection) {
@@ -127,7 +175,6 @@ public class UserDAO implements DAO<User> {
     public static int deleteUser(User user) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
 
         try {
             connection = Database.getDBConnection();
@@ -139,11 +186,6 @@ public class UserDAO implements DAO<User> {
             statement.setInt(counter++, user.getUserId());
             statement.execute();
             connection.commit();
-            // resultSet = statement.getGeneratedKeys();
-
-            // if (resultSet.next()) {
-            // return resultSet.getInt(1);
-            // }
 
         } catch (SQLException exception) {
             logger.log(Level.SEVERE, exception.getMessage());
@@ -151,9 +193,6 @@ public class UserDAO implements DAO<User> {
                 connection.rollback();
             }
         } finally {
-            // if (null != resultSet) {
-            // resultSet.close();
-            // }
 
             if (null != statement) {
                 statement.close();

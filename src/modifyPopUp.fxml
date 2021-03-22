@@ -27,8 +27,8 @@
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
     <PasswordField GridPane.columnIndex="0" GridPane.rowIndex="5" fx:id="passwordField"/>
 
-    <!-- <Button text="Save Changes" onAction="#handleSaveChangesButtonAction" fx:id="saveChangesButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <Button text="Cancel Changes" onAction="#handleCancelChangesButtonAction" fx:id="cancelChangesButton" GridPane.columnIndex="1" GridPane.rowIndex="6"/> -->
+    <Button text="Save Changes" onAction="#handleSaveChangesButtonAction" fx:id="saveChangesButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Button text="Cancel Changes" onAction="#handleCancelChangesButtonAction" fx:id="cancelChangesButton" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
     <!-- <stylesheets>
         <URL value="@view.css"/>
