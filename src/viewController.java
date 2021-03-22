@@ -2,6 +2,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.beans.EventHandler;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 
@@ -10,10 +11,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class viewController implements Initializable {
@@ -26,6 +31,8 @@ public class viewController implements Initializable {
     private TextField lastNameTextField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button displayButton;
 
     @FXML
     private TableView<User> tableView;
@@ -121,7 +128,7 @@ public class viewController implements Initializable {
                                 if (user_deleted > 0) {
                                     Alert alert = new Alert(AlertType.INFORMATION, "Deletion successful");
                                     alert.show();
-                           
+
                                     tableView.getItems().setAll(parseUserList());
 
                                 } else {
@@ -148,6 +155,8 @@ public class viewController implements Initializable {
 
     private ObservableList<User> parseUserList() {
         // parse and construct User datamodel list by looping
+        data.clear();
+
         users = UserDAO.getAllUsers();
         for (int i = 0; i < users.size(); i++) {
             User user = new User(users.get(i).getUserId(), users.get(i).getLastName(), users.get(i).getFirstName(),
@@ -192,4 +201,20 @@ public class viewController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleDisplayButtonAction(ActionEvent event) {
+        System.out.println("AHHH");
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPopUp.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }   
+    }
 }

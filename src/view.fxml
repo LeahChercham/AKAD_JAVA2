@@ -28,8 +28,6 @@
 
     <Button text="save" onAction="#handleSaveButtonAction" fx:id="saveNewUserButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
-
-
     <TableView fx:id="tableView" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="10">
         <columns>
             <TableColumn text="userId:" fx:id="userId">
@@ -44,9 +42,11 @@
             </TableColumn>
             <TableColumn text="Last modified:" fx:id="modifiedTimeStamp">
             </TableColumn>
-         
         </columns>
     </TableView>
+
+    <Button text="display" onAction="#handleDisplayButtonAction" fx:id="displayButton" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
+
 
     <stylesheets>
         <URL value="@view.css"/>

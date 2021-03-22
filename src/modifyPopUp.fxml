@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.collections.*?>
+<?import fxmltableview.*?>
+<?import java.net.URL?>
+
+<!-- <?scenebuilder-stylesheet view.css?> -->
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1"
+    xmlns="http://javafx.com/javafx/2.2" fx:controller="modifyPopUpController" hgap="10" vgap="10" alignment="center">
+    
+    <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="firstNameTextField"/>
+
+    <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField GridPane.columnIndex="0" GridPane.rowIndex="3" fx:id="lastNameTextField"/>
+
+    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <PasswordField GridPane.columnIndex="0" GridPane.rowIndex="5" fx:id="passwordField"/>
+
+    <!-- <Button text="Save Changes" onAction="#handleSaveChangesButtonAction" fx:id="saveChangesButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Button text="Cancel Changes" onAction="#handleCancelChangesButtonAction" fx:id="cancelChangesButton" GridPane.columnIndex="1" GridPane.rowIndex="6"/> -->
+
+    <!-- <stylesheets>
+        <URL value="@view.css"/>
+    </stylesheets> -->
+
+</GridPane>
