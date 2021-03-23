@@ -23,12 +23,12 @@
 
     <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <TextField GridPane.columnIndex="0" GridPane.rowIndex="3" fx:id="lastNameTextField"/>
-
+<!-- 
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <PasswordField GridPane.columnIndex="0" GridPane.rowIndex="5" fx:id="passwordField"/>
+    <PasswordField GridPane.columnIndex="0" GridPane.rowIndex="5" fx:id="passwordField"/> -->
 
-    <Button text="Save Changes" onAction="#handleSaveChangesButtonAction" fx:id="saveChangesButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <Button text="Cancel Changes" onAction="#handleCancelChangesButtonAction" fx:id="cancelChangesButton" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Button text="Save Changes" onAction="#handleSaveChangesButtonAction" fx:id="saveChangesButton" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Button text="Cancel Changes" onAction="#handleCancelChangesButtonAction" fx:id="cancelChangesButton" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
     <!-- <stylesheets>
         <URL value="@view.css"/>

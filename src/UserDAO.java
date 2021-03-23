@@ -82,7 +82,7 @@ public class UserDAO implements DAO<User> {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            String query = "INSERT INTO users(first_name, last_name, password, created_at, modified_at) VALUES(?, ?, ?, NOW(), NOW())";
+            String query = "INSERT INTO users(first_name, last_name, password, created_at, modified_at) VALUES(?, ?, MD5(?), NOW(), NOW())";
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             int counter = 1;
@@ -127,13 +127,13 @@ public class UserDAO implements DAO<User> {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
             // Update
-            String query = "UPDATE users SET first_name = ?, last_name = ?, password = ?, modified_at = NOW() WHERE user_id = ?";
+            String query = "UPDATE users SET first_name = ?, last_name = ?, modified_at = NOW() WHERE user_id = ?";
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             int counter = 1;
             statement.setString(counter++, user.getFirstName());
             statement.setString(counter++, user.getLastName());
-            statement.setString(counter++, user.getPassword());
+            // statement.setString(counter++, user.getPassword());
             statement.setLong(counter++, user.getUserId());
             statement.executeUpdate();
             connection.commit();

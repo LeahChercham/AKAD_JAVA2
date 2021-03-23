@@ -36,7 +36,7 @@
             </TableColumn>
             <TableColumn text="Last Name:" fx:id="lastName">
             </TableColumn>
-            <TableColumn text="Password:" fx:id="password">
+            <TableColumn text="MD5-Password:" fx:id="password">
             </TableColumn>
             <TableColumn text="Created at:" fx:id="createdTimeStamp">
             </TableColumn>
