@@ -33,7 +33,6 @@ public class viewController implements Initializable {
     private PasswordField passwordField;
     @FXML
     private Button displayButton;
-
     @FXML
     private TableView<User> tableView;
     @FXML
@@ -213,7 +212,11 @@ public class viewController implements Initializable {
         }
     }
 
+
+
     public void refreshData(){
         tableView.getItems().setAll(parseUserList());
+
+        // Das geht, data liste wird aktualisiert aber screen nicht
     }
 }

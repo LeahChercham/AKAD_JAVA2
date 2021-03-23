@@ -138,11 +138,6 @@ public class UserDAO implements DAO<User> {
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
-            // if (resultSet.next()) {
-            //     System.out.print(resultSet.getInt(0));
-            //     System.out.print(resultSet.getInt(1));
-            //     return resultSet.getInt(1);
-            // }
             return 1;
         } catch (SQLException exception) {
             logger.log(Level.SEVERE, exception.getMessage());

@@ -12,7 +12,7 @@ public class App extends Application {
         FXMLLoader viewSceneLoader = new FXMLLoader(getClass().getResource("view.fxml"));
         Parent root = (Parent) viewSceneLoader.load();
 
-        // viewController ctrlPointer = (viewController)
+        viewController ctrlPointer = (viewController)
         viewSceneLoader.getController();
 
         Scene scene = new Scene(root, 1000, 500);

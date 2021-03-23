@@ -1,7 +1,5 @@
-import java.net.URL;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +52,25 @@ public class modifyPopUpController {
             Alert alert = new Alert(AlertType.INFORMATION, "Modification successful");
             alert.show();
 
-            viewController.refreshData();
+            // viewController viewCtrlr = new viewController();
+            // viewCtrlr.refreshData();
+            // new viewController().refreshData();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                viewController viewController = fxmlLoader.getController();
+                viewController.refreshData();
+                // Stage stage = new Stage();
+                // stage.setTitle("Modify");
+                // stage.setScene(new Scene(root, 500, 250));
+                // stage.show();
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
             closeStage();
 
         } else {
@@ -67,6 +83,7 @@ public class modifyPopUpController {
 
     @FXML
     private void handleCancelChangesButtonAction(ActionEvent event) {
+        closeStage();
     }
 
     private void closeStage() {
