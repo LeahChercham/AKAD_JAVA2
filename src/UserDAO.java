@@ -201,11 +201,6 @@ public class UserDAO implements DAO<User> {
         return 1;
     }
 
-    // TODO UserExists
-    public static boolean userExists(String firstName, String lastName) {
-        return true;
-    }
-
     @Override
     public int save(User t) {
         // TODO Auto-generated method stub

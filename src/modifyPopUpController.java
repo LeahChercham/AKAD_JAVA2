@@ -17,8 +17,6 @@ public class modifyPopUpController {
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
-    // @FXML
-    // private PasswordField passwordField;
     @FXML
     private Button saveChangesButton;
     @FXML
@@ -31,14 +29,12 @@ public class modifyPopUpController {
 
         firstNameTextField.setText(user.getFirstName());
         lastNameTextField.setText(user.getLastName());
-        // passwordField.setText(user.getPassword());
     }
 
     @FXML
     private void handleSaveChangesButtonAction(ActionEvent event) {
         modifiedUser.setFirstName(String.valueOf(firstNameTextField.getText().trim()));
         modifiedUser.setLastName(String.valueOf(lastNameTextField.getText().trim()));
-        // modifiedUser.setPassword(String.valueOf(passwordField.getText().trim()));
 
         int user_modified;
         try {

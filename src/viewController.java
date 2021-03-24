@@ -187,13 +187,12 @@ public class viewController implements Initializable {
         String lastName = String.valueOf(lastNameTextField.getText().trim());
         String password = String.valueOf(passwordField.getText().trim());
 
-        if (UserDAO.userExists(firstName, lastName)) {
+
             User user = new User(null, firstName, lastName, password, null, null);
             int user_saved;
             try {
                 user_saved = UserDAO.saveUser(user);
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
                 user_saved = 0;
             }
@@ -205,18 +204,13 @@ public class viewController implements Initializable {
                 alert.show();
 
                 tableView.getItems().setAll(parseUserList());
-            }
-        } else {
+            } else {
             Alert alert = new Alert(AlertType.ERROR, "User already exists!");
             alert.show();
-        }
-    }
+        }}
 
-
-
-    public void refreshData(){
+    public void refreshData() {
         tableView.getItems().setAll(parseUserList());
-
-        // Das geht, data liste wird aktualisiert aber screen nicht
+        // TODO Das geht, data liste wird aktualisiert aber screen nicht
     }
 }
