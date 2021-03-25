@@ -19,9 +19,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 public class viewController implements Initializable {
+    private static final viewController INSTANCE = new viewController();
 
     @FXML
     private Button saveNewUserButton;
@@ -87,12 +89,27 @@ public class viewController implements Initializable {
                                 try {
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPopUp.fxml"));
                                     Parent root = (Parent) fxmlLoader.load();
-                                    modifyPopUpController modifyPopUpController = fxmlLoader.getController();
+                                    modifyPopUpController modifyPopUpController = (modifyPopUpController) fxmlLoader
+                                            .getController();
                                     modifyPopUpController.transferMessage(user);
                                     Stage stage = new Stage();
                                     stage.setTitle("Modify");
                                     stage.setScene(new Scene(root, 500, 250));
+                                    stage.setOnHidden(e -> {
+                                        System.out.println("Stage is closing");
+                                        // Save file
+                                        try {
+                                            refreshData();
+                                        } catch (IOException e1) {
+                                            // TODO Auto-generated catch block
+                                            e1.printStackTrace();
+                                        }
+                                    });
                                     stage.show();
+                                    // stage.setOnHidden({
+                                    // System.out.println("on hidden");
+                                    // refreshData();
+                                    // });
 
                                 } catch (IOException e) {
                                     // TODO Auto-generated catch block
@@ -163,9 +180,11 @@ public class viewController implements Initializable {
         tableView.getItems().setAll(parseUserList());
         tableView.getColumns().add(modifyEntryColumn);
         tableView.getColumns().add(deleteEntryColumn);
+
     }
 
     private ObservableList<User> parseUserList() {
+        System.out.println("parseUserList");
         // parse and construct User datamodel list by looping
         data.clear();
 
@@ -177,6 +196,8 @@ public class viewController implements Initializable {
 
             data.add(user);
         }
+        System.out.println("Before data return");
+        tableView.refresh();
         return data;
     }
 
@@ -187,30 +208,36 @@ public class viewController implements Initializable {
         String lastName = String.valueOf(lastNameTextField.getText().trim());
         String password = String.valueOf(passwordField.getText().trim());
 
+        User user = new User(null, firstName, lastName, password, null, null);
+        int user_saved;
+        try {
+            user_saved = UserDAO.saveUser(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            user_saved = 0;
+        }
+        if (user_saved > 0) {
+            firstNameTextField.clear();
+            passwordField.clear();
+            lastNameTextField.clear();
+            Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
+            alert.show();
 
-            User user = new User(null, firstName, lastName, password, null, null);
-            int user_saved;
-            try {
-                user_saved = UserDAO.saveUser(user);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                user_saved = 0;
-            }
-            if (user_saved > 0) {
-                firstNameTextField.clear();
-                passwordField.clear();
-                lastNameTextField.clear();
-                Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
-                alert.show();
-
-                tableView.getItems().setAll(parseUserList());
-            } else {
+            tableView.getItems().setAll(parseUserList());
+        } else {
             Alert alert = new Alert(AlertType.ERROR, "User already exists!");
             alert.show();
-        }}
+        }
+    }
 
-    public void refreshData() {
+    public void refreshData() throws IOException {
+        System.out.println("refreshData");
         tableView.getItems().setAll(parseUserList());
-        // TODO Das geht, data liste wird aktualisiert aber screen nicht
+        tableView.refresh();
+
+    }
+
+    public static viewController getInstance() {
+        return viewController.INSTANCE;
     }
 }

@@ -48,9 +48,6 @@ public class modifyPopUpController {
             Alert alert = new Alert(AlertType.INFORMATION, "Modification successful");
             alert.show();
 
-            // viewController viewCtrlr = new viewController();
-            // viewCtrlr.refreshData();
-            // new viewController().refreshData();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
@@ -61,8 +58,7 @@ public class modifyPopUpController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-
+            System.out.println("Closing stage:");
             closeStage();
 
         } else {
