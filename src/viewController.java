@@ -91,7 +91,6 @@ public class viewController implements Initializable {
                                     stage.setTitle("Modify");
                                     stage.setScene(new Scene(root, 500, 250));
                                     stage.setOnHidden(e -> {
-                                        System.out.println("Stage is closing");
                                         try {
                                             refreshData();
                                         } catch (IOException e1) {
@@ -168,7 +167,6 @@ public class viewController implements Initializable {
     }
 
     private ObservableList<User> parseUserList() {
-        System.out.println("parseUserList");
         data.clear();
 
         users = UserDAO.getAllUsers();
@@ -179,7 +177,6 @@ public class viewController implements Initializable {
 
             data.add(user);
         }
-        System.out.println("Before data return");
         tableView.refresh();
         return data;
     }
@@ -214,7 +211,6 @@ public class viewController implements Initializable {
     }
 
     public void refreshData() throws IOException {
-        System.out.println("refreshData");
         tableView.getItems().setAll(parseUserList());
         tableView.refresh();
     }

@@ -56,7 +56,6 @@ public class modifyPopUpController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Closing stage:");
             closeStage();
 
         } else {

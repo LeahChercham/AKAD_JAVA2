@@ -26,7 +26,7 @@
 
     <Button text="save" onAction="#handleSaveButtonAction" fx:id="saveNewUserButton" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
-    <TableView fx:id="tableView" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="10">
+    <TableView fx:id="tableView" GridPane.columnIndex="1" prefWidth="900" GridPane.rowIndex="0" GridPane.rowSpan="10">
         <columns>
             <TableColumn text="userId:" fx:id="userId">
             </TableColumn>

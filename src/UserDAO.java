@@ -19,11 +19,6 @@ public class UserDAO implements DAO<User> {
     private ArrayList<User> users = new ArrayList<>();
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
-    public UserDAO() {
-        users.add(new User(null, "John", "Doe", null, null, null));
-        users.add(new User(null, "Susan", "Smith", null, null, null));
-    }
-
     @Override
     public Optional<User> get(long UserID) {
         return Optional.ofNullable(users.get((int) UserID));
