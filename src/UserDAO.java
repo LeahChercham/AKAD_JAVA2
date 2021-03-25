@@ -15,16 +15,11 @@ import java.util.logging.Logger;
  *
  */
 
-public class UserDAO implements DAO<User> {
-    private ArrayList<User> users = new ArrayList<>();
+public class UserDAO {
+    // private ArrayList<User> users = new ArrayList<>();
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
-    @Override
-    public Optional<User> get(long UserID) {
-        return Optional.ofNullable(users.get((int) UserID));
-    }
 
-    // @Override
     public static ArrayList<User> getAllUsers() {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -34,9 +29,7 @@ public class UserDAO implements DAO<User> {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
             String query = "SELECT user_id, first_name, last_name, password, created_at, modified_at, password FROM users";
-            statement = connection.prepareStatement(query);
-            // int counter = 1;
-            // statement.setString(counter++, first_name);
+            statement = connection.prepareStatement(query);;
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
@@ -45,8 +38,6 @@ public class UserDAO implements DAO<User> {
             }
             return users;
         } catch (SQLException exception) {
-
-            // Severe: No Value specified for paramweter 1
             logger.log(Level.SEVERE, exception.getMessage());
         } finally {
             if (null != statement) {
@@ -68,7 +59,6 @@ public class UserDAO implements DAO<User> {
         return users;
     }
 
-    // @Override
     public static int saveUser(User user) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -84,7 +74,6 @@ public class UserDAO implements DAO<User> {
             statement.setString(counter++, user.getFirstName());
             statement.setString(counter++, user.getLastName());
             statement.setString(counter++, user.getPassword());
-            // statement.setString(counter++, user.getPassword());
             statement.executeUpdate();
             connection.commit();
             resultSet = statement.getGeneratedKeys();
@@ -127,7 +116,6 @@ public class UserDAO implements DAO<User> {
             int counter = 1;
             statement.setString(counter++, user.getFirstName());
             statement.setString(counter++, user.getLastName());
-            // statement.setString(counter++, user.getPassword());
             statement.setLong(counter++, user.getUserId());
             statement.executeUpdate();
             connection.commit();
@@ -152,13 +140,6 @@ public class UserDAO implements DAO<User> {
             }
         }
         return 0;
-    }
-
-    @Override
-    public void update(User user, String[] params) {
-        user.setFirstName(Objects.requireNonNull(params[0], "FirstName cannot be null"));
-        user.setLastName(Objects.requireNonNull(params[1], "LastName cannot be null"));
-        users.add(user);
     }
 
     public static int deleteUser(User user) throws SQLException {
@@ -193,24 +174,5 @@ public class UserDAO implements DAO<User> {
         }
 
         return 1;
-    }
-
-    @Override
-    public int save(User t) {
-        // TODO Auto-generated method stub
-        // INFO i can not put the method in here because of static errors.
-        return 0;
-    }
-
-    @Override
-    public List<User> getAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void delete(User t) {
-        // TODO Auto-generated method stub
-
     }
 }
