@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class viewController implements Initializable {
-    private static final viewController INSTANCE = new viewController();
 
     @FXML
     private Button saveNewUserButton;
@@ -212,10 +211,6 @@ public class viewController implements Initializable {
 
     public void refreshData() throws IOException {
         tableView.getItems().setAll(parseUserList());
-        tableView.refresh();
     }
 
-    public static viewController getInstance() {
-        return viewController.INSTANCE;
-    }
 }
