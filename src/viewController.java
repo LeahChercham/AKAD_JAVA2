@@ -171,7 +171,7 @@ public class viewController implements Initializable {
 
         users = UserDAO.getAllUsers();
         for (int i = 0; i < users.size(); i++) {
-            User user = new User(users.get(i).getUserId(), users.get(i).getLastName(), users.get(i).getFirstName(),
+            User user = new User(users.get(i).getUserId(), users.get(i).getFirstName(), users.get(i).getLastName(),
                     users.get(i).getPassword(), users.get(i).getCreatedTimeStamp(),
                     users.get(i).getModifiedTimeStamp());
 
