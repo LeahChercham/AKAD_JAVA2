@@ -1,12 +1,9 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 public class viewController implements Initializable {
@@ -83,7 +79,6 @@ public class viewController implements Initializable {
                         } else {
                             modifyButton.setOnAction(event -> {
 
-                                // HERE FUNCTION MODIFY
                                 User user = getTableView().getItems().get(getIndex());
 
                                 try {
@@ -97,22 +92,14 @@ public class viewController implements Initializable {
                                     stage.setScene(new Scene(root, 500, 250));
                                     stage.setOnHidden(e -> {
                                         System.out.println("Stage is closing");
-                                        // Save file
                                         try {
                                             refreshData();
                                         } catch (IOException e1) {
-                                            // TODO Auto-generated catch block
                                             e1.printStackTrace();
                                         }
                                     });
                                     stage.show();
-                                    // stage.setOnHidden({
-                                    // System.out.println("on hidden");
-                                    // refreshData();
-                                    // });
-
                                 } catch (IOException e) {
-                                    // TODO Auto-generated catch block
                                     e.printStackTrace();
                                 }
 
@@ -142,14 +129,12 @@ public class viewController implements Initializable {
                         } else {
                             deleteButton.setOnAction(event -> {
 
-                                // HERE FUNCTION DELETE
                                 User user = getTableView().getItems().get(getIndex());
                                 int user_deleted;
 
                                 try {
                                     user_deleted = UserDAO.deleteUser(user);
                                 } catch (SQLException e) {
-                                    // TODO Auto-generated catch block
                                     e.printStackTrace();
                                     user_deleted = 0;
                                 }
@@ -172,7 +157,6 @@ public class viewController implements Initializable {
                 };
                 return cell;
             }
-
         };
 
         modifyEntryColumn.setCellFactory(cellFactoryModify);
@@ -185,7 +169,6 @@ public class viewController implements Initializable {
 
     private ObservableList<User> parseUserList() {
         System.out.println("parseUserList");
-        // parse and construct User datamodel list by looping
         data.clear();
 
         users = UserDAO.getAllUsers();
@@ -234,7 +217,6 @@ public class viewController implements Initializable {
         System.out.println("refreshData");
         tableView.getItems().setAll(parseUserList());
         tableView.refresh();
-
     }
 
     public static viewController getInstance() {

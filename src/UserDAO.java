@@ -126,7 +126,6 @@ public class UserDAO implements DAO<User> {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            // Update
             String query = "UPDATE users SET first_name = ?, last_name = ?, modified_at = NOW() WHERE user_id = ?";
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 

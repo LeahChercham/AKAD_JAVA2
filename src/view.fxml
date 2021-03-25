@@ -13,8 +13,6 @@
 <?import fxmltableview.*?>
 <?import java.net.URL?>
 
-<?scenebuilder-stylesheet view.css?>
-
 <GridPane xmlns:fx="http://javafx.com/fxml/1"
     xmlns="http://javafx.com/javafx/2.2" fx:controller="viewController" hgap="10" vgap="10" alignment="center">
     <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
@@ -44,9 +42,5 @@
             </TableColumn>
         </columns>
     </TableView>
-
-    <stylesheets>
-        <URL value="@view.css"/>
-    </stylesheets>
 
 </GridPane>

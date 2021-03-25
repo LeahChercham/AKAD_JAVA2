@@ -10,12 +10,12 @@ import java.sql.Date;
 public class User {
 
     // Attribute
-    private Integer userId; // automatic
+    private Integer userId; 
     private String lastName;
     private String firstName;
-    private String password; // md5 sql method
-    private Date createdTimeStamp; // automatic
-    private Date modifiedTimeStamp; // automatic
+    private String password;
+    private Date createdTimeStamp; 
+    private Date modifiedTimeStamp; 
 
     // Constructor
     public User(Integer userId, String lastName, String firstName, String password, Date creationTimeStamp,

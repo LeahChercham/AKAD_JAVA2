@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -55,7 +54,6 @@ public class modifyPopUpController {
                 viewController.refreshData();
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             System.out.println("Closing stage:");
@@ -78,5 +76,4 @@ public class modifyPopUpController {
         Stage stage = (Stage) saveChangesButton.getScene().getWindow();
         stage.close();
     }
-
 }
