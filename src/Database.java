@@ -8,7 +8,6 @@ import java.util.logging.*;
  *
  */
 public class Database {
-    // TODO: Zugriffsdaten verstecken
     private static final Logger logger = Logger.getLogger(Database.class.getName());
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/java2akad";

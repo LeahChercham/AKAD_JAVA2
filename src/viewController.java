@@ -165,23 +165,8 @@ public class viewController implements Initializable {
 
     }
 
-    private ObservableList<User> parseUserList() {
-        data.clear();
-
-        users = UserDAO.getAllUsers();
-        for (int i = 0; i < users.size(); i++) {
-            User user = new User(users.get(i).getUserId(), users.get(i).getFirstName(), users.get(i).getLastName(),
-                    users.get(i).getPassword(), users.get(i).getCreatedTimeStamp(),
-                    users.get(i).getModifiedTimeStamp());
-
-            data.add(user);
-        }
-        tableView.refresh();
-        return data;
-    }
-
     @FXML
-    private void handleSaveButtonAction(ActionEvent event) {
+    private void handleSaveButtonAction(ActionEvent event) throws IOException {
 
         String firstName = String.valueOf(firstNameTextField.getText().trim());
         String lastName = String.valueOf(lastNameTextField.getText().trim());
@@ -202,9 +187,9 @@ public class viewController implements Initializable {
             Alert alert = new Alert(AlertType.INFORMATION, "Save successful");
             alert.show();
 
-            tableView.getItems().setAll(parseUserList());
+            refreshData();
         } else {
-            Alert alert = new Alert(AlertType.ERROR, "User already exists!");
+            Alert alert = new Alert(AlertType.ERROR, "Save unsuccessful");
             alert.show();
         }
     }
@@ -213,4 +198,18 @@ public class viewController implements Initializable {
         tableView.getItems().setAll(parseUserList());
     }
 
+    private ObservableList<User> parseUserList() {
+        data.clear();
+
+        users = UserDAO.getAllUsers();
+        for (int i = 0; i < users.size(); i++) {
+            User user = new User(users.get(i).getUserId(), users.get(i).getFirstName(), users.get(i).getLastName(),
+                    users.get(i).getPassword(), users.get(i).getCreatedTimeStamp(),
+                    users.get(i).getModifiedTimeStamp());
+
+            data.add(user);
+        }
+        tableView.refresh();
+        return data;
+    }
 }

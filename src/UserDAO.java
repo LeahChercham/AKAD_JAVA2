@@ -19,7 +19,6 @@ public class UserDAO {
     // private ArrayList<User> users = new ArrayList<>();
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
-
     public static ArrayList<User> getAllUsers() {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -28,8 +27,9 @@ public class UserDAO {
         try {
             connection = Database.getDBConnection();
             connection.setAutoCommit(false);
-            String query = "SELECT user_id, first_name, last_name, password, created_at, modified_at, password FROM users";
-            statement = connection.prepareStatement(query);;
+            String query = "SELECT user_id, last_name, first_name, password, created_at, modified_at, password FROM users";
+            statement = connection.prepareStatement(query);
+            ;
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
@@ -90,11 +90,9 @@ public class UserDAO {
             if (null != resultSet) {
                 resultSet.close();
             }
-
             if (null != statement) {
                 statement.close();
             }
-
             if (null != connection) {
                 connection.close();
             }
@@ -114,8 +112,8 @@ public class UserDAO {
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             int counter = 1;
-            statement.setString(counter++, user.getFirstName());
             statement.setString(counter++, user.getLastName());
+            statement.setString(counter++, user.getFirstName());
             statement.setLong(counter++, user.getUserId());
             statement.executeUpdate();
             connection.commit();
